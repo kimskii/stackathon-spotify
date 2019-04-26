@@ -11,7 +11,7 @@ const Recommendation = props => {
         <td>ALBUM</td>
       </tr>
       {recommendation.map(track => (
-        <tr>
+        <tr key={track.name}>
           <td>
             <a href={track.external_urls.spotify}>{track.name}</a>
           </td>
