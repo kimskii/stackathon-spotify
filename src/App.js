@@ -4,6 +4,7 @@ import { authEndpoint, clientId, redirectUri, scopes } from './config';
 import hash from './hash';
 // import Quiz from './Components/Quiz';
 import Player from './Player';
+import Recommendation from './Components/Recommendation';
 import logo from './logo.svg';
 import './App.css';
 
@@ -12,6 +13,7 @@ class App extends Component {
     super();
     this.state = {
       token: null,
+      recommendation: [],
       item: {
         album: {
           images: [{ url: '' }],
@@ -23,6 +25,7 @@ class App extends Component {
       is_playing: 'Paused',
       progress_ms: 0,
     };
+    this.getRecommendation = this.getRecommendation.bind(this);
     this.getCurrentlyPlaying = this.getCurrentlyPlaying.bind(this);
   }
   componentDidMount() {
@@ -34,6 +37,7 @@ class App extends Component {
       this.setState({
         token: _token,
       });
+      this.getRecommendation(_token);
       this.getCurrentlyPlaying(_token);
     }
   }
@@ -57,11 +61,29 @@ class App extends Component {
     });
   }
 
+  //TODO: my take on the recommendation API
+  getRecommendation(token) {
+    $.ajax({
+      url:
+        'https://api.spotify.com/v1/recommendations?market=ES&seed_genres=country&limit=10',
+      type: 'GET',
+      headers: { Authorization: 'Bearer ' + token },
+      success: data => {
+        console.log('are there recommendations?', data);
+        this.setState({
+          recommendation: data.tracks,
+        });
+      },
+    });
+  }
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          {!this.state.token ? (
+            <img src={logo} className="App-logo" alt="logo" />
+          ) : null}
           {!this.state.token && (
             <a
               className="btn btn--loginApp-link"
@@ -73,13 +95,15 @@ class App extends Component {
             </a>
           )}
           {this.state.token && (
-            //TODO: Commented out player for reference to see what props to pass down
-            <Player
-              item={this.state.item}
-              is_playing={this.state.is_playing}
-              progress_ms={this.progress_ms}
-            />
-            // <Quiz />
+            <div>
+              {/* <Player
+                item={this.state.item}
+                is_playing={this.state.is_playing}
+                progress_ms={this.progress_ms}
+              /> */}
+              {/* <Quiz /> */}
+              <Recommendation recommendation={this.state.recommendation} />
+            </div>
           )}
         </header>
       </div>
