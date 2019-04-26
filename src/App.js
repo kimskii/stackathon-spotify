@@ -1,10 +1,11 @@
-import React, { Component } from "react";
-import * as $ from "jquery";
-import { authEndpoint, clientId, redirectUri, scopes } from "./config";
-import hash from "./hash";
-import Player from "./Player";
-import logo from "./logo.svg";
-import "./App.css";
+import React, { Component } from 'react';
+import * as $ from 'jquery';
+import { authEndpoint, clientId, redirectUri, scopes } from './config';
+import hash from './hash';
+// import Quiz from './Components/Quiz';
+import Player from './Player';
+import logo from './logo.svg';
+import './App.css';
 
 class App extends Component {
   constructor() {
@@ -13,14 +14,14 @@ class App extends Component {
       token: null,
       item: {
         album: {
-          images: [{ url: "" }]
+          images: [{ url: '' }],
         },
-        name: "",
-        artists: [{ name: "" }],
-        duration_ms:0,
+        name: '',
+        artists: [{ name: '' }],
+        duration_ms: 0,
       },
-      is_playing: "Paused",
-      progress_ms: 0
+      is_playing: 'Paused',
+      progress_ms: 0,
     };
     this.getCurrentlyPlaying = this.getCurrentlyPlaying.bind(this);
   }
@@ -31,7 +32,7 @@ class App extends Component {
     if (_token) {
       // Set token
       this.setState({
-        token: _token
+        token: _token,
       });
       this.getCurrentlyPlaying(_token);
     }
@@ -40,24 +41,23 @@ class App extends Component {
   getCurrentlyPlaying(token) {
     // Make a call using the token
     $.ajax({
-      url: "https://api.spotify.com/v1/me/player",
-      type: "GET",
-      beforeSend: (xhr) => {
-        xhr.setRequestHeader("Authorization", "Bearer " + token);
+      url: 'https://api.spotify.com/v1/me/player',
+      type: 'GET',
+      beforeSend: xhr => {
+        xhr.setRequestHeader('Authorization', 'Bearer ' + token);
       },
-      success: (data) => {
-        console.log("data", data);
+      success: data => {
+        console.log('data', data);
         this.setState({
           item: data.item,
           is_playing: data.is_playing,
           progress_ms: data.progress_ms,
         });
-      }
+      },
     });
   }
 
   render() {
-
     return (
       <div className="App">
         <header className="App-header">
@@ -66,18 +66,20 @@ class App extends Component {
             <a
               className="btn btn--loginApp-link"
               href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
-                "%20"
+                '%20'
               )}&response_type=token&show_dialog=true`}
             >
               Login to Spotify
             </a>
           )}
           {this.state.token && (
+            //TODO: Commented out player for reference to see what props to pass down
             <Player
               item={this.state.item}
               is_playing={this.state.is_playing}
               progress_ms={this.progress_ms}
             />
+            // <Quiz />
           )}
         </header>
       </div>
