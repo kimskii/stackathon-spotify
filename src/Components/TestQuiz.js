@@ -5,13 +5,30 @@ import { getRecommendation } from './Reducer';
 // import Recommendation from './Recommendation';
 import hash from '../hash';
 
-// const QuizQuestions = [
-//   { question: 'Are you feeling...', imageOne: '', imageTwo: '' },
-//   { question: 'Are you feeling...', imageOne: '', imageTwo: '' },
-//   { question: 'Are you feeling...', imageOne: '', imageTwo: '' },
-//   { question: 'Are you feeling...', imageOne: '', imageTwo: '' },
-//   { question: 'Are you feeling...', imageOne: '', imageTwo: '' },
-// ];
+const QuizQuestions = [
+  {
+    id: 1,
+    question: 'Are you feeling...',
+    type: 'genre',
+    valueOne: 'classical',
+    valueTwo: 'rock',
+    endOfQuiz: false,
+    imageOne:
+      'https://cdn.dribbble.com/users/1056629/screenshots/3220439/unicorn.gif',
+    imageTwo:
+      'https://media1.tenor.com/images/bb1ce6f41734e0e897d26dfaa0a01a29/tenor.gif?itemid=7552017',
+  },
+  {
+    id: 2,
+    question: 'Pick one',
+    type: 'instrumentalness',
+    valueOne: 0.7,
+    valueTwo: 0.3,
+    endOfQuiz: false,
+    imageOne: 'https://media2.giphy.com/media/1wXbeoh28PW8v9ANDN/source.gif',
+    imageTwo: 'https://media.giphy.com/media/bLEXpHXxV15Go/giphy.gif',
+  },
+];
 
 class DisconnectedTestQuiz extends React.Component {
   constructor() {
@@ -26,6 +43,7 @@ class DisconnectedTestQuiz extends React.Component {
       endOfQuiz: false,
       playlistReady: false,
       spotifyData: [],
+      currentQuestion: {},
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -41,7 +59,8 @@ class DisconnectedTestQuiz extends React.Component {
   }
 
   render() {
-    console.log('were hitting testquiz');
+    let nextQuestion = QuizQuestions[this.currentQuestion.id];
+    console.log('Next Question - were hitting testquiz', nextQuestion);
     return (
       <div>
         <h3 className="quiz-question">Are you feeling...</h3>
@@ -53,6 +72,7 @@ class DisconnectedTestQuiz extends React.Component {
               this.setState({
                 genre: 'classical',
                 endOfQuiz: true,
+                currentQuestion: nextQuestion,
               })
             }
           />
