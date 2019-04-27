@@ -1,15 +1,19 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getRecommendation } from './Reducer';
+// import Recommendation from './Recommendation';
+import hash from '../hash';
 
-const QuizQuestions = [
-  { question: 'Are you feeling...', imageOne: '', imageTwo: '' },
-  { question: 'Are you feeling...', imageOne: '', imageTwo: '' },
-  { question: 'Are you feeling...', imageOne: '', imageTwo: '' },
-  { question: 'Are you feeling...', imageOne: '', imageTwo: '' },
-  { question: 'Are you feeling...', imageOne: '', imageTwo: '' },
-];
+// const QuizQuestions = [
+//   { question: 'Are you feeling...', imageOne: '', imageTwo: '' },
+//   { question: 'Are you feeling...', imageOne: '', imageTwo: '' },
+//   { question: 'Are you feeling...', imageOne: '', imageTwo: '' },
+//   { question: 'Are you feeling...', imageOne: '', imageTwo: '' },
+//   { question: 'Are you feeling...', imageOne: '', imageTwo: '' },
+// ];
 
-class TestQuiz extends React.Component {
+class DisconnectedTestQuiz extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -21,6 +25,7 @@ class TestQuiz extends React.Component {
       genre: '',
       endOfQuiz: false,
       playlistReady: false,
+      spotifyData: [],
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -29,7 +34,9 @@ class TestQuiz extends React.Component {
     event.preventDefault();
     console.log('is state updated?', this.props);
     //want to be able to call getRecommendation(token, this.state)
-    this.props.getRecommendation(this.props.token, this.state);
+
+    this.props.getRecommendation(this.state, hash.access_token);
+
     this.setState({ playlistReady: true });
   }
 
@@ -64,10 +71,20 @@ class TestQuiz extends React.Component {
           ) : null}
         </form>
 
-        {this.state.playlistReady && <Redirect to="/recommendation" />}
+        {this.state.playlistReady && <Redirect to="./recommendation" />}
       </div>
     );
   }
 }
 
-export default TestQuiz;
+function mapDispatchToProps(dispatch) {
+  return {
+    getRecommendation: (seed, token) =>
+      dispatch(getRecommendation(seed, token)),
+  };
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(DisconnectedTestQuiz);

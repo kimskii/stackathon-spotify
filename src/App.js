@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import * as $ from 'jquery';
 import { authEndpoint, clientId, redirectUri, scopes } from './config';
 import hash from './hash';
@@ -7,6 +7,7 @@ import TestQuiz from './Components/TestQuiz';
 import Recommendation from './Components/Recommendation';
 import logo from './logo.svg';
 import './App.css';
+import { HashRouter as Router } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 
 class App extends Component {
@@ -83,7 +84,8 @@ class App extends Component {
   render() {
     console.log('checking state', this.state);
     return (
-      <div className="App">
+      <Router>
+        {/* <div className="App"> */}
         <header className="App-header">
           {!this.state.token ? (
             <div>
@@ -100,22 +102,14 @@ class App extends Component {
           ) : null}
 
           {this.state.token && (
-            <div className="quiz-playlist-container">
-              <TestQuiz
-                getRecommendation={this.getRecommendation}
-                token={this.state.token}
-              />
+            <Fragment>
+              <Route exact path="/" component={TestQuiz} />
               <Route exact path="/recommendation" component={Recommendation} />
-
-              {/* <TestQuiz
-                getRecommendation={this.getRecommendation}
-                token={this.state.token}
-              />
-              <Recommendation recommendation={this.state.recommendation} /> */}
-            </div>
+            </Fragment>
           )}
+          {/* </div> */}
         </header>
-      </div>
+      </Router>
     );
   }
 }
