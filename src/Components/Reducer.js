@@ -10,16 +10,18 @@ const GET_RECOMMENDATION = 'GET_RECOMMENDATION';
 
 //thunk
 
+// &target_valence=${seed.valence}&target_energy=${
+//   seed.energy
+// }&target_dancebility=${seed.dancebility}&target_instrumentalness=${
+//   seed.instrumentalness
+// }&target_popularity=${seed.popularity}
+
 export const getRecommendation = (seed, token) => {
   return async dispatch => {
     await $.ajax({
       url: `https://api.spotify.com/v1/recommendations?market=US&seed_genres=${
         seed.genre
-      }&limit=10&target_valence=${seed.valence}&target_energy=${
-        seed.energy
-      }&target_dancebility=${seed.dancebility}&target_instrumentalness=${
-        seed.instrumentalness
-      }&target_popularity=${seed.popularity}`,
+      }&limit=10&targetinstrumentalness=${seed.instrumentalness}`,
       type: 'GET',
       headers: { Authorization: 'Bearer ' + token },
       success: data => {

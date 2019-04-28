@@ -24,7 +24,7 @@ const QuizQuestions = [
     type: 'instrumentalness',
     valueOne: 0.7,
     valueTwo: 0.3,
-    endOfQuiz: false,
+    endOfQuiz: true,
     imageOne: 'https://media2.giphy.com/media/1wXbeoh28PW8v9ANDN/source.gif',
     imageTwo: 'https://media.giphy.com/media/bLEXpHXxV15Go/giphy.gif',
   },
@@ -43,7 +43,7 @@ class DisconnectedTestQuiz extends React.Component {
       endOfQuiz: false,
       playlistReady: false,
       spotifyData: [],
-      currentQuestion: {},
+      currentQuestion: 0,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -59,26 +59,31 @@ class DisconnectedTestQuiz extends React.Component {
   }
 
   render() {
-    let nextQuestion = QuizQuestions[this.currentQuestion.id];
-    console.log('Next Question - were hitting testquiz', nextQuestion);
+    // console.log('Next Question - were hitting testquiz', nextQuestion);
+    const currentQuestion = QuizQuestions[this.state.currentQuestion];
+
+    const type = currentQuestion.type;
+
+    const newState = currentQuestion.endOfQuiz
+      ? { endOfQuiz: currentQuestion.endOfQuiz }
+      : {
+          endOfQuiz: currentQuestion.endOfQuiz,
+          currentQuestion: this.state.currentQuestion + 1,
+        };
+
+    newState[type] = currentQuestion.valueOne;
     return (
       <div>
-        <h3 className="quiz-question">Are you feeling...</h3>
+        <h3 className="quiz-question">{currentQuestion.question}</h3>
         <div className="quiz-container">
           <img
-            src="https://cdn.dribbble.com/users/1056629/screenshots/3220439/unicorn.gif"
+            src={currentQuestion.imageOne}
             alt=""
-            onClick={() =>
-              this.setState({
-                genre: 'classical',
-                endOfQuiz: true,
-                currentQuestion: nextQuestion,
-              })
-            }
+            onClick={() => this.setState(newState)}
           />
           or
           <img
-            src="https://media1.tenor.com/images/bb1ce6f41734e0e897d26dfaa0a01a29/tenor.gif?itemid=7552017"
+            src={currentQuestion.imageTwo}
             alt=""
             onClick={() => this.setState({ energy: 0.2 })}
           />
