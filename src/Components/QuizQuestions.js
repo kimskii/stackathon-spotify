@@ -9,7 +9,7 @@ const QuizQuestions = [
     imageOne:
       'https://cdn.dribbble.com/users/1056629/screenshots/3220439/unicorn.gif',
     imageTwo:
-      'https://media1.tenor.com/images/bb1ce6f41734e0e897d26dfaa0a01a29/tenor.gif?itemid=7552017',
+      'https://media2.giphy.com/media/8boMf1VXVHoJy/giphy.gif?cid=790b76115cc5eca3714d636f41d299e7&rid=giphy.gif',
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ const QuizQuestions = [
     valueTwo: 0.3,
     endOfQuiz: false,
     imageOne: 'https://media2.giphy.com/media/1wXbeoh28PW8v9ANDN/source.gif',
-    imageTwo: 'https://media.giphy.com/media/bLEXpHXxV15Go/giphy.gif',
+    imageTwo: 'https://i.redd.it/19agtq4u3ol11.gif',
   },
   {
     id: 3,
@@ -35,7 +35,7 @@ const QuizQuestions = [
   },
   {
     id: 4,
-    question: "You're mostly...",
+    question: 'Your spirit animal?',
     type: 'energy',
     valueOne: 0.7,
     valueTwo: 0.3,

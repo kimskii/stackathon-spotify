@@ -1,8 +1,6 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getRecommendation } from './Reducer';
-// import Recommendation from './Recommendation';
 import hash from '../hash';
 import QuizQuestions from './QuizQuestions';
 
@@ -17,7 +15,6 @@ class DisconnectedTestQuiz extends React.Component {
       artist: null,
       genre: '',
       endOfQuiz: false,
-      playlistReady: false,
       spotifyData: [],
       currentQuestion: 0,
     };
@@ -27,11 +24,8 @@ class DisconnectedTestQuiz extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     console.log('is state updated?', this.props);
-    //want to be able to call getRecommendation(token, this.state)
-
     this.props.getRecommendation(this.state, hash.access_token);
-
-    this.setState({ playlistReady: true });
+    this.props.history.push('/recommendation');
   }
 
   render() {
@@ -75,8 +69,6 @@ class DisconnectedTestQuiz extends React.Component {
             <button type="submit">Generate Playlist!</button>
           ) : null}
         </form>
-
-        {this.state.playlistReady && <Redirect to="./recommendation" />}
       </div>
     );
   }
