@@ -21,7 +21,11 @@ export const getRecommendation = (seed, token) => {
     await $.ajax({
       url: `https://api.spotify.com/v1/recommendations?market=US&seed_genres=${
         seed.genre
-      }&limit=10&targetinstrumentalness=${seed.instrumentalness}`,
+      }&limit=10&target_instrumentalness=${
+        seed.instrumentalness
+      }&target_dancebility=${seed.dancebility}&target_valence=${
+        seed.valence
+      }&target_energy=${seed.energy}&seed_artists=${seed.artist}`,
       type: 'GET',
       headers: { Authorization: 'Bearer ' + token },
       success: data => {

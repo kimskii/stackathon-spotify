@@ -4,31 +4,7 @@ import { connect } from 'react-redux';
 import { getRecommendation } from './Reducer';
 // import Recommendation from './Recommendation';
 import hash from '../hash';
-
-const QuizQuestions = [
-  {
-    id: 1,
-    question: 'Are you feeling...',
-    type: 'genre',
-    valueOne: 'classical',
-    valueTwo: 'rock',
-    endOfQuiz: false,
-    imageOne:
-      'https://cdn.dribbble.com/users/1056629/screenshots/3220439/unicorn.gif',
-    imageTwo:
-      'https://media1.tenor.com/images/bb1ce6f41734e0e897d26dfaa0a01a29/tenor.gif?itemid=7552017',
-  },
-  {
-    id: 2,
-    question: 'Pick one',
-    type: 'instrumentalness',
-    valueOne: 0.7,
-    valueTwo: 0.3,
-    endOfQuiz: true,
-    imageOne: 'https://media2.giphy.com/media/1wXbeoh28PW8v9ANDN/source.gif',
-    imageTwo: 'https://media.giphy.com/media/bLEXpHXxV15Go/giphy.gif',
-  },
-];
+import QuizQuestions from './QuizQuestions';
 
 class DisconnectedTestQuiz extends React.Component {
   constructor() {
@@ -38,7 +14,7 @@ class DisconnectedTestQuiz extends React.Component {
       energy: null,
       dancebility: null,
       instrumentalness: null,
-      popularity: null,
+      artist: null,
       genre: '',
       endOfQuiz: false,
       playlistReady: false,
@@ -64,14 +40,20 @@ class DisconnectedTestQuiz extends React.Component {
 
     const type = currentQuestion.type;
 
-    const newState = currentQuestion.endOfQuiz
+    const newStateOne = currentQuestion.endOfQuiz
       ? { endOfQuiz: currentQuestion.endOfQuiz }
       : {
           endOfQuiz: currentQuestion.endOfQuiz,
           currentQuestion: this.state.currentQuestion + 1,
         };
 
-    newState[type] = currentQuestion.valueOne;
+    const newStateTwo = Object.assign({}, newStateOne);
+
+    newStateOne[type] = currentQuestion.valueOne;
+    newStateTwo[type] = currentQuestion.valueTwo;
+
+    console.log('checking state', this.state);
+
     return (
       <div>
         <h3 className="quiz-question">{currentQuestion.question}</h3>
@@ -79,15 +61,13 @@ class DisconnectedTestQuiz extends React.Component {
           <img
             src={currentQuestion.imageOne}
             alt=""
-            onClick={() => this.setState(newState)}
+            onClick={() => this.setState(newStateOne)}
           />
-          or
           <img
             src={currentQuestion.imageTwo}
             alt=""
-            onClick={() => this.setState({ energy: 0.2 })}
+            onClick={() => this.setState(newStateTwo)}
           />
-          ?
         </div>
 
         <form onSubmit={this.handleSubmit}>

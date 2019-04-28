@@ -63,7 +63,6 @@ class App extends Component {
   //   });
   // }
 
-  //TODO: my take on the recommendation API
   getRecommendation(token, seed) {
     console.log('was getRec ever called????');
     $.ajax({
@@ -75,7 +74,7 @@ class App extends Component {
       success: data => {
         console.log('are there recommendations?', data);
         this.setState({
-          recommendation: data.tracks,
+          recommendation: data.tdracks,
         });
       },
     });
