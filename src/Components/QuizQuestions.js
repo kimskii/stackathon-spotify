@@ -1,7 +1,7 @@
 const QuizQuestions = [
   {
     id: 1,
-    question: 'Are you feeling...',
+    question: "You're feeling rather...",
     type: 'valence',
     valueOne: 0.7,
     valueTwo: 0.3,
@@ -59,7 +59,7 @@ const QuizQuestions = [
   },
   {
     id: 6,
-    question: 'Would you hang out with the king or queen?',
+    question: 'Who would you hang out with?',
     type: 'artist',
     valueOne: '6eUKZXaKkcviH0Ku9w2n3V',
     valueTwo: '6vWDO969PvNqNYHIOW5v0m',

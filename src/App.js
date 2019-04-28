@@ -5,10 +5,10 @@ import hash from './hash';
 // import Player from './Player';
 import TestQuiz from './Components/TestQuiz';
 import Recommendation from './Components/Recommendation';
-import logo from './logo.svg';
 import './App.css';
 import { HashRouter as Router } from 'react-router-dom';
 import { Route } from 'react-router-dom';
+import Typed from 'react-typed';
 
 class App extends Component {
   constructor() {
@@ -85,19 +85,36 @@ class App extends Component {
     return (
       <Router>
         {/* <div className="App"> */}
-        <header className="App-header">
+        <body className="App-body">
           {!this.state.token ? (
-            <div>
-              <img src={logo} className="App-logo" alt="logo" />
-              <a
-                className="btn btn--loginApp-link"
-                href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
-                  '%20'
-                )}&response_type=token&show_dialog=true`}
-              >
-                Login to Spotify
-              </a>
-            </div>
+            <Fragment>
+              <div className="login-cover-photo">
+                <img
+                  src="https://cdn.dribbble.com/users/722246/screenshots/2989548/dribbble.gif"
+                  alt=""
+                />
+              </div>
+              <div className="login-page-container">
+                <div className="login-intro">
+                  <Typed
+                    strings={[
+                      'Take a quiz to create your personalized playlist',
+                    ]}
+                    typeSpeed={40}
+                  />
+                </div>
+
+                <a
+                  id="login-spotify"
+                  className="btn btn--login"
+                  href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
+                    '%20'
+                  )}&response_type=token&show_dialog=true`}
+                >
+                  Login to Spotify
+                </a>
+              </div>
+            </Fragment>
           ) : null}
 
           {this.state.token && (
@@ -107,7 +124,7 @@ class App extends Component {
             </Fragment>
           )}
           {/* </div> */}
-        </header>
+        </body>
       </Router>
     );
   }

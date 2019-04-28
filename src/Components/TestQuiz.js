@@ -50,25 +50,28 @@ class DisconnectedTestQuiz extends React.Component {
 
     return (
       <div>
-        <h3 className="quiz-question">{currentQuestion.question}</h3>
+        <div className="quiz-question-container">
+          {currentQuestion.question}
+        </div>
         <div className="quiz-container">
           <img
             src={currentQuestion.imageOne}
             alt=""
             onClick={() => this.setState(newStateOne)}
           />
+          {/* <p>or</p> */}
           <img
             src={currentQuestion.imageTwo}
             alt=""
             onClick={() => this.setState(newStateTwo)}
           />
-        </div>
 
-        <form onSubmit={this.handleSubmit}>
-          {this.state.endOfQuiz ? (
-            <button type="submit">Generate Playlist!</button>
-          ) : null}
-        </form>
+          <form onSubmit={this.handleSubmit}>
+            {this.state.endOfQuiz ? (
+              <button type="submit">Generate Playlist!</button>
+            ) : null}
+          </form>
+        </div>
       </div>
     );
   }
