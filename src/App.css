@@ -1,7 +1,7 @@
 .login-cover-photo {
   display: flex;
   flex-direction: row;
-  flex-basis: 40rem;
+  flex-basis: 70vh;
   justify-content: center;
   align-items: center;
   /* align-content: stretch; */
@@ -9,10 +9,14 @@
   min-height: 100vh;
 }
 
+.login-cover-photo img {
+  height: 60rem;
+}
+
 .login-page-container {
   display: flex;
   flex-direction: column;
-  flex-basis: 130rem;
+  flex-basis: 190rem;
   /* flex-grow: auto; */
   min-height: 100vh;
   justify-content: space-around;
@@ -45,11 +49,11 @@ div.login-intro {
   display: flex;
 
   color: #ffaccf;
-  /* text-decoration: underline;  */
+
   background-color: #333;
   min-height: 30vh;
   min-width: 200vh;
-  /* align-self: stretch; */
+
   justify-content: flex-start;
   align-items: center;
   padding-left: 10rem;
@@ -226,7 +230,7 @@ body {
 }
 
 .quiz-container img {
-  height: 45rem;
+  height: 50vh;
   padding: 50px;
 }
 
