@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Typed from 'react-typed';
 
 class DisconnectedRecommendation extends React.Component {
   render() {
@@ -24,7 +25,9 @@ class DisconnectedRecommendation extends React.Component {
             </tr>
           ))}
         </tbody>
-
+        {/* <div className="ending">
+          <Typed strings={['Enjoy the playlist!']} typeSpeed={40} />
+        </div> */}
         <a
           id="login-spotify"
           className="btn btn--login"

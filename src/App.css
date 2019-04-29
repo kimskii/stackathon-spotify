@@ -75,6 +75,11 @@ td {
   padding-left: 100px;
 }
 
+tr:hover {
+  background: #1ecd97;
+  color: #333;
+}
+
 tbody {
   /* padding: 40px; */
   padding-left: 50px;
@@ -92,6 +97,11 @@ tbody {
 
 a {
   color: #1ecd97;
+}
+
+a:hover {
+  background: #1ecd97;
+  color: #333;
 }
 
 .playlist-header {
@@ -169,7 +179,7 @@ body {
 
 .btn {
   position: fixed;
-  bottom: 6em;
+  bottom: 4em;
   right: 4em;
   background-color: transparent;
   border-radius: 2em;
@@ -280,3 +290,14 @@ body {
   top: 22rem;
   right: 4rem;
 } */
+
+.ending {
+  /* display: flex;
+  flex-direction: row; */
+  font-size: 8vmin;
+  color: #ffaccf;
+  padding-bottom: 20rem;
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+}

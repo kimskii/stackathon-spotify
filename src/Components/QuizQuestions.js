@@ -13,7 +13,7 @@ const QuizQuestions = [
   },
   {
     id: 2,
-    question: 'Just pick one',
+    question: 'Just pick one.',
     type: 'instrumentalness',
     valueOne: 0.7,
     valueTwo: 0.3,
@@ -23,7 +23,7 @@ const QuizQuestions = [
   },
   {
     id: 3,
-    question: 'Rave or Stay? That is the question.',
+    question: 'Dance party or staycation?',
     type: 'dancebility',
     valueOne: 0.7,
     valueTwo: 0.3,
@@ -47,7 +47,7 @@ const QuizQuestions = [
   },
   {
     id: 5,
-    question: 'Vibes?',
+    question: 'Pick a vibe.',
     type: 'genre',
     valueOne: 'acoustic%2Cambient',
     valueTwo: 'pop%2Chip_hop',
