@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { getRecommendation } from './Reducer';
 import hash from '../hash';
 import QuizQuestions from './QuizQuestions';
+import CircularProgressbar from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 class DisconnectedTestQuiz extends React.Component {
   constructor() {
@@ -17,12 +19,13 @@ class DisconnectedTestQuiz extends React.Component {
       endOfQuiz: false,
       spotifyData: [],
       currentQuestion: 0,
+      percentage: 17,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(event) {
-    event.preventDefault();
+    // event.preventDefault();
     console.log('is state updated?', this.props);
     this.props.getRecommendation(this.state, hash.access_token);
     this.props.history.push('/recommendation');
@@ -35,10 +38,11 @@ class DisconnectedTestQuiz extends React.Component {
     const type = currentQuestion.type;
 
     const newStateOne = currentQuestion.endOfQuiz
-      ? { endOfQuiz: currentQuestion.endOfQuiz }
+      ? { endOfQuiz: currentQuestion.endOfQuiz, percentage: 100 }
       : {
           endOfQuiz: currentQuestion.endOfQuiz,
           currentQuestion: this.state.currentQuestion + 1,
+          percentage: this.state.percentage + 17,
         };
 
     const newStateTwo = Object.assign({}, newStateOne);
@@ -52,6 +56,41 @@ class DisconnectedTestQuiz extends React.Component {
       <div>
         <div className="quiz-question-container">
           {currentQuestion.question}
+          {!this.state.endOfQuiz && (
+            <CircularProgressbar
+              className="progress-bar"
+              percentage={this.state.percentage}
+              text={`Q ${currentQuestion.id} of 6`}
+              background
+              backgroundPadding={0}
+              styles={{
+                background: {
+                  fill: 'transparent',
+                },
+                text: {
+                  fill: '#1ecd97',
+                  fontSize: '16px',
+                },
+                path: {
+                  stroke: '#1ecd97',
+                },
+                trail: { stroke: 'transparent' },
+              }}
+            />
+          )}
+          {this.state.endOfQuiz ? (
+            <div className="submit-playlist">
+              <img
+                id="generate-playlist"
+                type="submit"
+                src="https://thumbs.gfycat.com/HeftyAncientCaimanlizard-max-1mb.gif"
+                border="0"
+                value="generate-playlist"
+                alt="submit"
+              />
+              <p onClick={() => this.handleSubmit()}>Generate Playlist</p>
+            </div>
+          ) : null}
         </div>
         <div className="quiz-container">
           <img
@@ -59,18 +98,11 @@ class DisconnectedTestQuiz extends React.Component {
             alt=""
             onClick={() => this.setState(newStateOne)}
           />
-          {/* <p>or</p> */}
           <img
             src={currentQuestion.imageTwo}
             alt=""
             onClick={() => this.setState(newStateTwo)}
           />
-
-          <form onSubmit={this.handleSubmit}>
-            {this.state.endOfQuiz ? (
-              <button type="submit">Generate Playlist!</button>
-            ) : null}
-          </form>
         </div>
       </div>
     );

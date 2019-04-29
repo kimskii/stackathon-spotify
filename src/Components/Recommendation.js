@@ -2,11 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 class DisconnectedRecommendation extends React.Component {
-  handleSubmit(event) {
-    event.preventDefault();
-    this.props.history.push('/');
-  }
-
   render() {
     const recommendation = this.props.recommendation || [];
 
@@ -14,12 +9,6 @@ class DisconnectedRecommendation extends React.Component {
     return (
       <div>
         <tbody>
-          <tr>
-            <td>SONG</td>
-            <td>ARTIST</td>
-            <td>ALBUM</td>
-          </tr>
-
           {recommendation.map(track => (
             <tr key={track.name}>
               <td>
@@ -31,9 +20,13 @@ class DisconnectedRecommendation extends React.Component {
           ))}
         </tbody>
 
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          <button type="submit">Play Again</button>
-        </form>
+        <a
+          id="login-spotify"
+          className="btn btn--login"
+          href="http://localhost:3000/#/"
+        >
+          Play Again
+        </a>
       </div>
     );
   }
