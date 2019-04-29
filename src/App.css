@@ -70,8 +70,33 @@ div.login-intro {
   /* font-size: 8vh; */
 }
 
-.playlist {
-  background-color: pink;
+td {
+  padding: 50px;
+  padding-left: 100px;
+}
+
+tbody {
+  /* padding: 40px; */
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 60px;
+  min-height: 50vh;
+  min-width: 50vh;
+  background-color: transparent;
+  border: 1.5em solid #1ecd97;
+  border-radius: 2em;
+  color: #1ecd97;
+  position: absolute;
+  top: 20rem;
+}
+
+a {
+  color: #1ecd97;
+}
+
+.playlist-header {
+  font-size: 12vmin;
+  font-style: bold;
 }
 
 .progress-bar {

@@ -9,11 +9,13 @@ class DisconnectedRecommendation extends React.Component {
     return (
       <div className="playlist">
         <tbody>
+          <tr className="playlist-header">
+            <td>Song</td>
+            <td>Artist</td>
+            <td>Album</td>
+          </tr>
           {recommendation.map(track => (
             <tr key={track.name}>
-              <td>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlC-oa19nzfLCO1lEW4igRyzAVIAn_JCkyWiDddRKnC_tnbYrzeA" />
-              </td>
               <td>
                 <a href={track.external_urls.spotify}>{track.name}</a>
               </td>
